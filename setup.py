@@ -115,7 +115,7 @@ else:
 
 setup(
     name="coredis",
-    version="4.16.1,
+    version="4.16.1",
     description="Python async client for Redis key-value store",
     long_description=long_description,
     long_description_content_type="text/markdown",
