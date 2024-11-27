@@ -24,6 +24,19 @@ async def test_connect_tcp(redis_basic):
     assert conn._transport is None
 
 
+async def test_connect_cred_provider(redis_basic):
+    conn = Connection()
+    assert conn.host == "127.0.0.1"
+    assert conn.port == 6379
+    assert str(conn) == "Connection<host=127.0.0.1,port=6379,db=0>"
+    request = await conn.create_request(b"PING")
+    res = await request
+    assert res == b"PONG"
+    assert conn._transport is not None
+    conn.disconnect()
+    assert conn._transport is None
+
+
 @pytest.mark.os("linux")
 async def test_connect_tcp_keepalive_options(redis_basic):
     conn = Connection(
